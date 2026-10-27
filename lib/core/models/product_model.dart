@@ -62,9 +62,9 @@ class Product extends Equatable {
     required this.title,
     required this.description,
     required this.category,
-    // required this.price,
+    required this.price,
     required this.discountPercentage,
-    // required this.rating,
+    required this.rating,
     required this.stock,
     required this.tags,
     required this.brand,
@@ -87,9 +87,9 @@ class Product extends Equatable {
   final String title;
   final String description;
   final String category;
-  // final double price;
+  final double price;
   final double discountPercentage;
-  // final double rating;
+  final double rating;
   final int stock;
   final List<String> tags;
   final String brand;
@@ -112,7 +112,7 @@ class Product extends Equatable {
     String? title,
     String? description,
     String? category,
-    // double? price,
+    double? price,
     double? discountPercentage,
     double? rating,
     int? stock,
@@ -137,9 +137,9 @@ class Product extends Equatable {
       title: title ?? this.title,
       description: description ?? this.description,
       category: category ?? this.category,
-      // price: price ?? this.price,
+      price: price ?? this.price,
       discountPercentage: discountPercentage ?? this.discountPercentage,
-      // rating: rating ?? this.rating,
+      rating: rating ?? this.rating,
       stock: stock ?? this.stock,
       tags: tags ?? this.tags,
       brand: brand ?? this.brand,
@@ -166,9 +166,12 @@ class Product extends Equatable {
       title: json["title"] ?? "",
       description: json["description"] ?? "",
       category: json["category"] ?? "",
-      // price: json["price"] ?? 0.0,
-      discountPercentage: json["discountPercentage"] ?? 0.0,
-      // rating: json["rating"] ?? 0.0,
+      price: (json["price"] as num?)?.toDouble() ?? 0.0,
+      discountPercentage:
+          (json["discountPercentage"] as num?)?.toDouble() ?? 0.0,
+      rating: json["rating"] is Map
+          ? ((json["rating"]["rate"] as num?)?.toDouble() ?? 0.0)
+          : ((json["rating"] as num?)?.toDouble() ?? 0.0),
       stock: json["stock"] ?? 0,
       tags: json["tags"] == null
           ? []
@@ -201,9 +204,9 @@ class Product extends Equatable {
     "title": title,
     "description": description,
     "category": category,
-    // "price": price,
+    "price": price,
     "discountPercentage": discountPercentage,
-    // "rating": rating,
+    "rating": rating,
     "stock": stock,
     "tags": tags.map((x) => x).toList(),
     "brand": brand,
@@ -224,7 +227,7 @@ class Product extends Equatable {
 
   @override
   String toString() {
-    return "$id, $title, $description, $category, $discountPercentage, $stock, $tags, $brand, $sku, $weight, $dimensions, $warrantyInformation, $shippingInformation, $availabilityStatus, $reviews, $returnPolicy, $minimumOrderQuantity, $meta, $images, $thumbnail, ";
+    return "$id, $title, $description, $category, $price, $rating, $discountPercentage, $stock, $tags, $brand, $sku, $weight, $dimensions, $warrantyInformation, $shippingInformation, $availabilityStatus, $reviews, $returnPolicy, $minimumOrderQuantity, $meta, $images, $thumbnail, ";
   }
 
   @override
@@ -233,9 +236,9 @@ class Product extends Equatable {
     title,
     description,
     category,
-    // price,
+    price,
     discountPercentage,
-    // rating,
+    rating,
     stock,
     tags,
     brand,

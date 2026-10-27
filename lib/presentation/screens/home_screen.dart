@@ -107,12 +107,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ),
                                   ),
                                 ),
-                                // Padding(
-                                //   padding: const EdgeInsets.symmetric(
-                                //     horizontal: 8,
-                                //   ),
-                                //   child: Text('\$${product.brand}'),
-                                // ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                                  child: Text(
+                                    '\$${product.price.toStringAsFixed(2)}',
+                                    style: const TextStyle(fontWeight: FontWeight.bold),
+                                  ),
+                                ),
                                 Spacer(),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.end,
